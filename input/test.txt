@@ -1,0 +1,14 @@
+问题导读：
+1.job的本质是什么？
+2.任务的本质是什么？
+3.文件系统的Namespace由谁来管理，Namespace的作用是什么？
+4.Namespace 镜像文件(Namespace image)和操作日志文件(edit log)文件的作用是什么？
+5.Namenode记录着每个文件中各个块所在的数据节点的位置信息，但是他并不持久化存储这些信息，为什么？
+6.客户端读写某个数据时，是否通过NameNode？
+7.namenode，datanode，Namespace image，Edit log之间的关系是什么？
+8.一旦某个task失败了，JobTracker如何处理？
+9.JobClient JobClient在获取了JobTracker为Job分配的id之后，会在JobTracker的系统目录(HDFS)下为该Job创建一个单独的目录，目录的名字即是Job的id，该目录下
+会包含文件job.xml、job.jar等文件，这两个文件的作用是什么？
+10.JobTracker根据什么就能得到这个Job目录？
+11.JobTracker提交作业之前，为什么要检查内存？
+12.每个TaskTracker产生多个java 虚拟机（JVM）的原因是什么？
