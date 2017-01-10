@@ -45,6 +45,7 @@ public class WordCount{
 
     public static void main(String[] args) throws Exception{
         Configuration conf = new Configuration();
+//        conf.set("fs.defaultFS", "hdfs://192.168.105.10:9000");
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
         job.setMapperClass(TokenizerMapper.class);
