@@ -44,6 +44,7 @@ public class WordCount{
     }
 
     public static void main(String[] args) throws Exception{
+//        System.setProperty("hadoop.home.dir","D:\\Program Files\\hadoop-common");
         Configuration conf = new Configuration();
 //        conf.set("fs.defaultFS", "hdfs://192.168.105.10:9000");
         Job job = Job.getInstance(conf, "word count");
