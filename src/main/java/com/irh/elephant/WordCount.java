@@ -16,6 +16,7 @@ import java.util.StringTokenizer;
 public class WordCount{
 
     public static void main(String[] args) throws Exception{
+//        System.setProperty("hadoop.home.dir","D:\\Program Files\\hadoop-common");
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
