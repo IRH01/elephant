@@ -16,12 +16,11 @@ import java.util.StringTokenizer;
 public class WordCount{
 
     public static void main(String[] args) throws Exception{
-//        System.setProperty("hadoop.home.dir","D:\\Program Files\\hadoop-common");
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
         job.setMapperClass(TokenizerMapper.class);
-        job.setCombinerClass(IntSumReducer.class);
+        job.setCombinerClass(IntSumCombiner.class);
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
@@ -42,6 +41,19 @@ class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable>{
             word.set(itr.nextToken());
             context.write(word, one);
         }
+    }
+}
+
+class IntSumCombiner extends Reducer<Text, IntWritable, Text, IntWritable>{
+    private IntWritable result = new IntWritable();
+
+    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
+        int sum = 0;
+        for(IntWritable val : values){
+            sum += val.get();
+        }
+        result.set(sum);
+        context.write(key, result);
     }
 }
 
