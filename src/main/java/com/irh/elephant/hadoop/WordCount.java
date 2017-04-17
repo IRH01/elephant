@@ -1,4 +1,4 @@
-package com.irh.elephant;
+package com.irh.elephant.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -24,6 +24,7 @@ public class WordCount{
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+<<<<<<< HEAD:src/main/java/com/irh/elephant/WordCount.java
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
         job.submit();
@@ -31,14 +32,20 @@ public class WordCount{
 
         }
         //        System.exit(job.waitForCompletion(true) ? 0 : 1);
+=======
+        FileInputFormat.addInputPath(job, new Path("input"));
+        FileOutputFormat.setOutputPath(job, new Path("output"));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+>>>>>>> ca222bdffb93cd48e0d1e740bc51d90224df3ba6:src/main/java/com/irh/elephant/hadoop/WordCount.java
     }
 }
 
-class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable>{
+class TokenizerMapper<K1, V1, K2, V2> extends Mapper<Object, Text, Text, IntWritable>{
 
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
 
+    @Override
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
         StringTokenizer itr = new StringTokenizer(value.toString());
         while(itr.hasMoreTokens()){
@@ -48,10 +55,15 @@ class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable>{
     }
 }
 
+<<<<<<< HEAD:src/main/java/com/irh/elephant/WordCount.java
 class IntSumCombiner extends Reducer<Text, IntWritable, Text, IntWritable>{
 
+=======
+class IntSumCombiner<K1, V1, K2, V2> extends Reducer<Text, IntWritable, Text, IntWritable>{
+>>>>>>> ca222bdffb93cd48e0d1e740bc51d90224df3ba6:src/main/java/com/irh/elephant/hadoop/WordCount.java
     private IntWritable result = new IntWritable();
 
+    @Override
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
         int sum = 0;
         for(IntWritable val : values){
@@ -62,10 +74,11 @@ class IntSumCombiner extends Reducer<Text, IntWritable, Text, IntWritable>{
     }
 }
 
-class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
+class IntSumReducer<K1, V1, K2, V2> extends Reducer<Text, IntWritable, Text, IntWritable>{
 
     private IntWritable result = new IntWritable();
 
+    @Override
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
         int sum = 0;
         for(IntWritable val : values){
