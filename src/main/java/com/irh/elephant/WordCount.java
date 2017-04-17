@@ -26,7 +26,11 @@ public class WordCount{
         job.setOutputValueClass(IntWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.submit();
+        while(true){
+
+        }
+        //        System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
 
@@ -45,6 +49,7 @@ class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable>{
 }
 
 class IntSumCombiner extends Reducer<Text, IntWritable, Text, IntWritable>{
+
     private IntWritable result = new IntWritable();
 
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
