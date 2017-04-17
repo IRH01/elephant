@@ -24,19 +24,9 @@ public class WordCount{
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-<<<<<<< HEAD:src/main/java/com/irh/elephant/WordCount.java
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        job.submit();
-        while(true){
-
-        }
-        //        System.exit(job.waitForCompletion(true) ? 0 : 1);
-=======
         FileInputFormat.addInputPath(job, new Path("input"));
         FileOutputFormat.setOutputPath(job, new Path("output"));
         System.exit(job.waitForCompletion(true) ? 0 : 1);
->>>>>>> ca222bdffb93cd48e0d1e740bc51d90224df3ba6:src/main/java/com/irh/elephant/hadoop/WordCount.java
     }
 }
 
@@ -55,12 +45,7 @@ class TokenizerMapper<K1, V1, K2, V2> extends Mapper<Object, Text, Text, IntWrit
     }
 }
 
-<<<<<<< HEAD:src/main/java/com/irh/elephant/WordCount.java
-class IntSumCombiner extends Reducer<Text, IntWritable, Text, IntWritable>{
-
-=======
 class IntSumCombiner<K1, V1, K2, V2> extends Reducer<Text, IntWritable, Text, IntWritable>{
->>>>>>> ca222bdffb93cd48e0d1e740bc51d90224df3ba6:src/main/java/com/irh/elephant/hadoop/WordCount.java
     private IntWritable result = new IntWritable();
 
     @Override
